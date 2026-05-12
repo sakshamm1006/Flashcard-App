@@ -1,16 +1,35 @@
-# React + Vite
+# ✦ Flashcard Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered flashcard generator built with React, Node.js, and Groq AI. Generate study cards instantly from any notes or topic.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **AI Card Generation** — Paste notes or type a topic, get flashcards instantly
+- **Study Mode** — Flip cards, track what you know vs still learning
+- **Browse Mode** — View all cards in a grid, search by keyword
+- **Beautiful UI** — Purple & blue glassmorphism design
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend** — React, Vite, Tailwind CSS, React Router
+- **AI** — Groq API (Llama 3.3)
+- **Coming Soon** — Node.js backend, MongoDB, User Auth, Deploy
 
-## Expanding the ESLint configuration
+## 📸 Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> Home Page — Study Mode — Browse Page
+
+## 🧑‍💻 Run Locally
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Add your Groq API key in `client/.env`:
+VITE_GROQ_API_KEY=your_key_here
+
+## 📅 Built Day by Day
+
+This project is being built progressively — one feature per day.

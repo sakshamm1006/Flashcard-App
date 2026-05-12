@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Generate from "./pages/Generate"
 import Study from "./pages/Study"
 import Browse from "./pages/Browse"
+import NotFound from "./pages/NotFound"
 
 function HomeWrapper() {
   const navigate = useNavigate()
@@ -29,6 +30,7 @@ function App() {
         <Route path="/generate" element={<Layout><Generate /></Layout>} />
         <Route path="/study" element={<Layout><Study /></Layout>} />
         <Route path="/browse" element={<Layout><Browse /></Layout>} />
+        <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
     </BrowserRouter>
   )

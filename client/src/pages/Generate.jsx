@@ -95,7 +95,15 @@ Or just type a topic like: French Revolution"
               disabled={loading}
               className="ml-auto bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:from-purple-600 hover:to-blue-600 transition-all duration-300 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 disabled:opacity-40 disabled:scale-100"
             >
-              {loading ? "✨ Generating..." : "✨ Generate Cards"}
+              {loading ? (
+  <span className="flex items-center gap-2">
+    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+    </svg>
+    Generating...
+  </span>
+) : "✨ Generate Cards"}
             </button>
           </div>
 

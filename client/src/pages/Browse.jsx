@@ -62,11 +62,16 @@ function Browse() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((card, index) => (
             <div key={index} onClick={() => toggleFlip(index)}
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 cursor-pointer hover:bg-white/15 hover:scale-105 transition-all duration-300 min-h-36 flex flex-col justify-between group">
-              <div>
-                <span className={`text-xs uppercase tracking-widest font-medium ${flipped[index] ? "text-blue-400" : "text-purple-400"}`}>
-                  {flipped[index] ? "Answer" : "Question"}
-                </span>
+  className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 cursor-pointer hover:bg-white/15 hover:scale-105 transition-all duration-300 min-h-36 flex flex-col justify-between group">
+  <div>
+    <div className="flex items-center justify-between mb-2">
+      <span className={`text-xs uppercase tracking-widest font-medium ${flipped[index] ? "text-blue-400" : "text-purple-400"}`}>
+        {flipped[index] ? "Answer" : "Question"}
+      </span>
+     <span className="text-xs bg-purple-500/20 border border-purple-500/40 text-purple-300 px-2.5 py-0.5 rounded-full shadow-sm shadow-purple-500/30">
+  #{index + 1}
+</span>
+    </div>
                 <p className={`text-sm font-medium leading-relaxed mt-2 ${flipped[index] ? "text-gray-300" : "text-white"}`}>
                   {flipped[index] ? card.a : card.q}
                 </p>
