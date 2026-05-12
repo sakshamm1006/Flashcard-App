@@ -5,6 +5,8 @@ import Generate from "./pages/Generate"
 import Study from "./pages/Study"
 import Browse from "./pages/Browse"
 import NotFound from "./pages/NotFound"
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 function HomeWrapper() {
   const navigate = useNavigate()
@@ -31,6 +33,8 @@ function App() {
         <Route path="/study" element={<Layout><Study /></Layout>} />
         <Route path="/browse" element={<Layout><Browse /></Layout>} />
         <Route path="*" element={<Layout><NotFound /></Layout>} />
+        <Route path="/login" element={<Layout><Login /></Layout>} />
+        <Route path="/register" element={<Layout><Register /></Layout>} />
       </Routes>
     </BrowserRouter>
   )
