@@ -1,16 +1,38 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { getDecks, deleteDeck, getUser } from "../api/api"
 
 function Browse() {
   const [cards, setCards] = useState([])
   const [flipped, setFlipped] = useState({})
   const [search, setSearch] = useState("")
+  const [allDecks, setAllDecks] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
+  const user = getUser()
+  if (user) {
+    // Load from MongoDB
+    loadDecks()
+  } else {
+    // Load from localStorage
     const saved = localStorage.getItem("flashcards")
     if (saved) setCards(JSON.parse(saved))
-  }, [])
+  }
+}, [])
+
+async function loadDecks() {
+  try {
+    const decks = await getDecks()
+    if (decks && decks.length > 0) {
+      // Show latest deck's cards
+      setCards(decks[0].cards)
+      setAllDecks(decks)
+    }
+  } catch (e) {
+    console.log("Could not load decks")
+  }
+}
 
   function toggleFlip(index) {
     setFlipped((prev) => ({ ...prev, [index]: !prev[index] }))
@@ -38,16 +60,31 @@ function Browse() {
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-white">Your Deck</h1>
-            <p className="text-gray-400 mt-1">{cards.length} cards — tap any to flip</p>
-          </div>
-          <button onClick={() => navigate("/generate")}
-            className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-5 py-2.5 rounded-2xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/30">
-            + New Deck
-          </button>
-        </div>
+<div className="flex items-center justify-between mb-6">
+  <div>
+    <h1 className="text-3xl font-bold text-white">Your Deck</h1>
+    <p className="text-gray-400 mt-1">{cards.length} cards — tap any to flip</p>
+  </div>
+  <button onClick={() => navigate("/generate")}
+    className="bg-gradient-to-r from-purple-500 to-blue-500 text-white px-5 py-2.5 rounded-2xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/30">
+    + New Deck
+  </button>
+</div>
+
+{/* Deck switcher */}
+{allDecks.length > 1 && (
+  <div className="flex gap-2 flex-wrap mb-6">
+    {allDecks.map((deck, i) => (
+      <button
+        key={deck._id}
+        onClick={() => setCards(deck.cards)}
+        className="px-4 py-2 rounded-xl text-sm bg-white/10 border border-white/20 text-gray-300 hover:bg-white/20 hover:text-white transition-all duration-200"
+      >
+        {deck.topic.slice(0, 20)}...
+      </button>
+    ))}
+  </div>
+)}
 
         {/* Search */}
         <input

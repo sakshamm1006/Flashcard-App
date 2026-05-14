@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { saveDeck } from "../api/api"
 
 function Generate() {
   const [notes, setNotes] = useState("")
@@ -46,10 +47,21 @@ Make questions clear and specific. Answers should be 1-3 sentences.`
       const clean = text.replace(/```json|```/g, "").trim()
       const cards = JSON.parse(clean)
 
-      localStorage.setItem("flashcards", JSON.stringify(cards))
-      setStatus(`${cards.length} cards created!`)
-      setLoading(false)
-      navigate("/study")
+     localStorage.setItem("flashcards", JSON.stringify(cards))
+
+// Save to MongoDB if logged in
+const token = localStorage.getItem("token")
+if (token) {
+  try {
+    await saveDeck(notes, cards)
+  } catch (e) {
+    console.log("Could not save deck to DB")
+  }
+}
+
+setStatus(`${cards.length} cards created!`)
+setLoading(false)
+navigate("/study")
     } catch (e) {
       setStatus("Something went wrong. Try again.")
       setLoading(false)
